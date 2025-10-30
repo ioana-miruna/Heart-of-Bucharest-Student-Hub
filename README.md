@@ -106,3 +106,11 @@ The system will be developed as a **web-based platform** using:
 - Encapsulates interchangeable ranking and reward algorithms.  
 - Allows dynamic behavior changes without modifying base logic.  
 - Makes adding new reward strategies simple and maintainable.
+
+**Diagrams:**
+
+![Class Diagram.png](src/main/resources/assets/Class Diagram.png)
+
+![Sequence Diagram 1.png](src/main/resources/assets/Sequence Diagram 1.png)
+
+![Sequence Diagram 2.png](src/main/resources/assets/Sequence Diagram 2.png)
