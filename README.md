@@ -109,8 +109,8 @@ The system will be developed as a **web-based platform** using:
 
 **Diagrams:**
 
-![Class Diagram.png](src/main/resources/assets/Class Diagram.png)
+![Class Diagram.png](src/main/resources/assets/Class%20Diagram.png)
 
-![Sequence Diagram 1.png](src/main/resources/assets/Sequence Diagram 1.png)
+![Sequence Diagram 1.png](src/main/resources/assets/Sequence%20Diagram%201.png)
 
-![Sequence Diagram 2.png](src/main/resources/assets/Sequence Diagram 2.png)
+![Sequence Diagram 2.png](src/main/resources/assets/Sequence%20Diagram%202.png)
