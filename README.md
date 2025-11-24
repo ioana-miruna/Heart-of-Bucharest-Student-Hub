@@ -133,11 +133,6 @@ A monolith contains all features in one deployable application (Spring Boot). Fo
 * **Timing:** Notification and rewards happen **synchronously** (or via in-process scheduled tasks).
 * This approach is simplest for implementing and demonstrating the required design patterns in a single codebase.
 
-### Diagram: Component and Deployment
-
-![Monolith - Component Diagram](docs/monolith-component.png)
-![Monolith - Deployment Diagram](docs/monolith-deployment.png)
-
 ### ✔️ Pros
 * **Fast to implement:** good for graded projects and POC; fewer moving parts.
 * **Simple local dev & debugging:** one process, no network trace complexity.
@@ -168,17 +163,6 @@ Divide functionality into **separately deployable services**, each with its own 
 * **Message Broker (RabbitMQ or Kafka):** used for events (Observer). Use asynchronous messages for notifications and reward work; synchronous REST for strongly consistent queries where needed (e.g., capacity check or user validation).
 * **Service Discovery / Config / Monitoring:** optional (Eureka/Consul, Config Server, Prometheus/Grafana).
 * I will use **RabbitMQ** to keep synchronous REST calls only where immediate consistency is required.
-
-### Diagram: Component and Deployment
-
-
-
-[Image of Microservices - Component Diagram]
-
-
-
-[Image of Microservices - Deployment Diagram]
-
 
 ### ➡️ Data Flow Examples :
 * **Create event:** Client → API Gateway → Event Service (save) → Event Service publishes **`EventCreated`** → Notification Service consumes and emails subscribers.
@@ -213,14 +197,6 @@ This is a different distributed style from microservices, focusing on **asynchro
 
 ### ➡️ Data flow :
 Client issues commands → command handler validates & publishes events → events are appended to the event log → consumers react and update their local state/read models. This style treats events as the source of truth (event sourcing optionally) and provides excellent decoupling.
-
-### Diagram: Component and Deployment
-
-
-
-
-[Image of Event-Driven - Component Diagram]
-
 
 ### ✔️ Pros
 * **Extreme decoupling & extensibility:** new analytic or notification consumers can be added without touching producers — very good for future features (search, recommendations).
