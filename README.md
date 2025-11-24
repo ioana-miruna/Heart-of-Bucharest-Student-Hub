@@ -135,11 +135,8 @@ A monolith contains all features in one deployable application (Spring Boot). Fo
 
 ### Diagram: Component and Deployment
 
-
-
-[Image of Monolith - Component Diagram]
-
-
+![Monolith - Component Diagram](monolith - component.png)
+![Monolith - Deployment Diagram](monolith - deployment.png)
 
 ### ✔️ Pros
 * **Fast to implement:** good for graded projects and POC; fewer moving parts.
