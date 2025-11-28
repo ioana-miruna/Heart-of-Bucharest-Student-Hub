@@ -1,0 +1,36 @@
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - rabbitmq
+
+  event-service:
+    build: ./event-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - rabbitmq
+
+  booking-service:
+    build: ./booking-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - rabbitmq
+    environment:
+      # We force the config here so it overrides whatever is (or isn't) in the JAR
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:bookingdb;DB_CLOSE_ON_EXIT=FALSE
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.H2Dialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update

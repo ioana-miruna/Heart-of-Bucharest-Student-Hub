@@ -1,0 +1,5 @@
+rootProject.name = 'HeartOfBucharest'
+
+include 'user-service'
+include 'event-service'
+include 'booking-service'
