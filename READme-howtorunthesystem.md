@@ -29,11 +29,3 @@ They communicate via REST and RabbitMQ (message queue).
 2. Create a user, create an event, then create a booking.
 3. After booking, check user points (user-service consumes the booking.created message and updates points).
 
-## Notes / Limitations
-- This is a minimal POC focusing on microservices communication. You may extend:
-- use dedicated DTOs and validation,
-- implement capacity decrement with distributed transaction or saga,
-- improve message schemas and error handling,
-- add authentication, API Gateway, observability.
-
-
