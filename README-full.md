@@ -63,16 +63,15 @@ Copy code
 
 **Publisher — Booking Service**
 
-```java
+
 rabbitTemplate.convertAndSend(
     "events.exchange",
     "booking.created",
     msg
-); ```
+); 
 
 ## 🔄 Consumer — User Service
 
-```java
 @RabbitListener(queues = "booking.created.queue")
 public void handle(BookingMessage msg) {
     loyaltyService.awardPointsForBooking(msg.getCustomerId());
@@ -80,7 +79,6 @@ public void handle(BookingMessage msg) {
 
 ## 📊 2.2 RabbitMQ Architecture Diagram (PlantUML)
 
-```plantuml
 @startuml
 title Messaging Architecture (RabbitMQ)
 
@@ -100,7 +98,6 @@ The project implements **4 non-trivial design patterns**:
 
 ### 3.1 Singleton Pattern — User Service
 
-```java
 private static ConfigurationManager instance;
 
 public static synchronized ConfigurationManager getInstance() {
@@ -112,7 +109,6 @@ Why? Ensures all reward thresholds are consistent across the system.
 
 ### 3.2 Strategy Pattern — User Reward Logic
 
-```java
 public interface RewardAlgorithm { ... }
 
 public class ParticipationRewardStrategy implements RewardAlgorithm { ... }
@@ -122,7 +118,6 @@ Why? Allows flexible reward calculation algorithms.
 
 ### 3.3 Builder Pattern — Event Creation
 
-```java
 new EventBuilder()
     .withName("Workshop")
     .atLocation("Hall A")
@@ -155,14 +150,12 @@ Two types of communication:
 
 1. **Build all services**
 
-```bash
 ./gradlew clean build
 
 ## 🧪 How to Run the System (Local)
 
 ### Start microservices with Docker Compose
 
-```bash
 docker compose up --build
 
 ## 🧪 Open RabbitMQ Dashboard
@@ -178,7 +171,6 @@ Copy code
 
 **Example booking request:**
 
-```json
 POST http://localhost:8083/api/bookings
 {
     "customerId": 1,
@@ -195,17 +187,14 @@ A message is automatically sent to RabbitMQ → User service updates points.
 1. Triggered on **commits to main** & **pull requests**  
 2. Builds & tests all services:
 
-```bash
 ./gradlew clean build
 
 ### Builds Docker images
 
-```bash
 docker build -t user-service ./user-service
 
 ### Deploys to local Docker environment
 
-```bash
 docker compose up -d
 Fulfills requirement for a complete CI/CD pipeline.
 
@@ -213,7 +202,6 @@ Fulfills requirement for a complete CI/CD pipeline.
 
 **Dockerfile for each service:**
 
-```dockerfile
 FROM eclipse-temurin:17-jre
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} app.jar
@@ -221,7 +209,6 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 ## Docker Compose Orchestration Example
 
-```yaml
 user-service:
   build: ./user-service
 
@@ -229,7 +216,6 @@ user-service:
 
 ### 8.1 Microservices Deployment Diagram
 
-```plantuml
 @startuml
 node "Docker Host" {
   node "RabbitMQ" {
