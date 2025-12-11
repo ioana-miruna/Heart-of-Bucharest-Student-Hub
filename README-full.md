@@ -68,7 +68,7 @@ rabbitTemplate.convertAndSend(
     "events.exchange",
     "booking.created",
     msg
-);
+); '''
 
 ## 🔄 Consumer — User Service
 
