@@ -9,9 +9,6 @@ It is structured as **three independent microservices**:
 
 The system demonstrates **asynchronous inter-service communication**, **design patterns**, and a **full CI/CD pipeline using GitHub Actions**.  
 
-This project fulfills all requirements for the **highest evaluation grade (Grade 10)**.
-
-
 ## 🏗️ 1. System Architecture
 
 The system consists of **three independent microservices**, each packaged in its own Docker container:
