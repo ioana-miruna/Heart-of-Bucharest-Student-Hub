@@ -31,16 +31,11 @@ There is **no shared state** between services.
 
 ## 🔌 2. Message Queue Integration (RabbitMQ)
 
-**Core Requirement for Grade 10**  
-
 Microservices communicate using **RabbitMQ** as an **asynchronous message broker**.  
 
 **Message flow:**
 
 booking-service → RabbitMQ → user-service
-
-markdown
-Copy code
 
 ### ✔ Why asynchronous communication?
 
@@ -59,7 +54,6 @@ Copy code
 ### 🔄 2.1 Messaging Implementation
 
 **Publisher — Booking Service**
-
 
 rabbitTemplate.convertAndSend(
     "events.exchange",
@@ -91,7 +85,7 @@ UserService -> UserService : update loyalty points
 
 ## 🧠 3. Design Patterns Used in the Project
 
-The project implements **4 non-trivial design patterns**:
+The project implements **4 design patterns**:
 
 ### 3.1 Singleton Pattern — User Service
 
@@ -102,7 +96,7 @@ public static synchronized ConfigurationManager getInstance() {
     return instance;
 }
 
-Why? Ensures all reward thresholds are consistent across the system.
+Why? One way connection to the database.
 
 ### 3.2 Strategy Pattern — User Reward Logic
 
@@ -111,6 +105,7 @@ public interface RewardAlgorithm { ... }
 public class ParticipationRewardStrategy implements RewardAlgorithm { ... }
 
 private RewardAlgorithm strategy = new ParticipationRewardStrategy();
+
 Why? Allows flexible reward calculation algorithms.
 
 ### 3.3 Builder Pattern — Event Creation
@@ -120,6 +115,7 @@ new EventBuilder()
     .atLocation("Hall A")
     .capacity(40)
     .build();
+    
 Why? Creates complex objects cleanly and flexibly.
 
 ### 3.4 Observer Pattern — Messaging (RabbitMQ)
@@ -138,8 +134,6 @@ Two types of communication:
 
 1. **REST (Synchronous)** – Booking service → Event service (validate that event exists)  
 2. **RabbitMQ (Asynchronous)** – Booking service → User service (award reward points)  
-
-> Industry-standard combination for microservices.
 
 ---
 
@@ -160,9 +154,6 @@ docker compose up --build
 http://localhost:15672
 user: guest
 pass: guest
-
-bash
-Copy code
 
 ## 🧪 Test Endpoints (Postman)
 
@@ -209,7 +200,7 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 user-service:
   build: ./user-service
 
-## 📚 8. Architectural Diagrams (PlantUML)
+## 📚 8. Architectural Diagram (PlantUML)
 
 ### 8.1 Microservices Deployment Diagram
 
